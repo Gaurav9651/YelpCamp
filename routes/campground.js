@@ -1,6 +1,7 @@
 var express     = require("express");
 var router      = express.Router();
 var Campground  = require("../models/campground");
+var Comment    = require("../models/comment");
 var middleware  = require("../middleware");
 router.get("/campgrounds",function(req,res){
 	Campground.find({},function(error,Allcampgrounds){
@@ -53,7 +54,7 @@ router.get("/campgrounds/:id",function(req,res){
 		if(error)
 			{
 				req.flash("error","Cannot Find Campground");
-				 res.redirect("/");
+				 res.redirect("/campgrounds");
 			}
 		else
 			{
@@ -91,18 +92,50 @@ router.put("/campgrounds/:id",middleware.isCampgroundAuthorised,function(req,res
 })
 
 router.delete("/campgrounds/:id",middleware.isCampgroundAuthorised,function(req,res){
-   Campground.findOneAndRemove({_id:req.params.id},function(err)
-	{
-	   if(err)
-		   {
-			   res.redirect("/campgrounds");
-		   }
-	   else{
-		   req.flash("success","Succesfully Deleted Campground");
-		   res.redirect("/campgrounds");
-	   }
-   })
+	
+	Campground.findById(req.params.id).populate("comments").exec(function(error,foundcampground){
+		if(error)
+			{
+				console.log(error);
+				res.redirect("/campgrounds");
+			}
+		else{
+			foundcampground["comments"].forEach(function(comment)
+				{
+					Comment.findByIdAndRemove(comment._id,function(err)
+					 {
+						if(err)
+							{
+								res.redirect("/campgrounds");
+							}
+					})
+				})
+				Campground.findByIdAndRemove(req.params.id,function(err)
+			    {
+					if(err)
+						{
+							res.redirect("/campgrounds");
+						}
+					else{
+						req.flash("success","Succesfully deleted Campground");
+						res.redirect("/campgrounds");
+					}
+				})
+			}
+	})
 })
+//    Campground.findOneAndRemove({_id:req.params.id},function(err)
+// 	{
+// 	   if(err)
+// 		   {
+// 			   res.redirect("/campgrounds");
+// 		   }
+// 	   else{
+// 		   req.flash("success","Succesfully Deleted Campground");
+// 		   res.redirect("/campgrounds");
+// 	   }
+//    })
+// })
 
 
 module.exports=router;

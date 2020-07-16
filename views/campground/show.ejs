@@ -2,16 +2,19 @@
 
 <div class="container" id="show">
 	<div class="row">
-		<div class="col-lg-3">
+		<div class="col-lg-3 mt-4 d-none d-lg-block">
 			<ul class="list-group">
 			  <li class="list-group-item active">info 1</li>
 			  <li class="list-group-item">info 2</li>
 			  <li class="list-group-item">info 3</li>
 			</ul>
 		</div>
-		<div class="col-lg-9">
+		<div class="col-lg-9 mt-4">
+			
+				<div class="image-container">
+					<img src='<%= foundcampground["url"] %>' class="img-responsive image" >
+				</div>
 			<div class="card">
-				<img src='<%= foundcampground["url"] %>' class="img-responsive image" >
 				<div class="card-body caption">
 					<h4 class="float-right">Rs:<%= foundcampground["price"] %>/night</h4>
 					<h4 class="card-title"><a href="#"><%= foundcampground["name"] %></a></h4>

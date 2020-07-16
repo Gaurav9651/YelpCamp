@@ -1,6 +1,14 @@
-.image
+.image-container
 {
-	height:77vh;
+	width:100%;
+	padding-bottom:60%;
+	position:relative;
+}
+.image-container img
+{
+	width:100%;
+	height:100%;
+	position:absolute;
 }
 .well
 {
@@ -14,8 +22,18 @@
 {
 	margin-top:2rem;
 }
-.allcard
+.allimage
 {
 	width:100%;
 	height:10rem;
+}
+.allcard{
+	width:100%;
+	height:19.3rem;
+}
+@media only screen and (max-width:600px) {
+ .allcard{
+	width:90%;
+	 height:17rem;
+}
 }
