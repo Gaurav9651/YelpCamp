@@ -1,0 +1,17 @@
+<%- include("../partials/header.ejs") %>
+
+<h1 class="display-5 text-center mt-4">
+Edit
+</h1>
+<div class="container mt-3" style="width:30%; min-width:400px">
+	<form action='/campgrounds/<%= campgroundid %>/comments/<%= comment["_id"] %>?_method=PUT' method="post">
+		<div class="form-group">
+			<input type="text" class="form-control" name="editedcomment[title]" value="<%= comment['title'] %>">
+		</div>
+		<button class="btn btn-success" style="width:100%;" >
+			Submit
+		</button>
+	</form>
+</div>
+
+<%- include("../partials/footer.ejs") %>

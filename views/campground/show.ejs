@@ -1,0 +1,71 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container" id="show">
+	<div class="row">
+		<div class="col-lg-3">
+			<ul class="list-group">
+			  <li class="list-group-item active">info 1</li>
+			  <li class="list-group-item">info 2</li>
+			  <li class="list-group-item">info 3</li>
+			</ul>
+		</div>
+		<div class="col-lg-9">
+			<div class="card">
+				<img src='<%= foundcampground["url"] %>' class="img-responsive image" >
+				<div class="card-body caption">
+					<h4 class="float-right">Rs:<%= foundcampground["price"] %>/night</h4>
+					<h4 class="card-title"><a href="#"><%= foundcampground["name"] %></a></h4>
+					<p class="card-text">
+						<p>
+							<em>created by <%= foundcampground.author.username %></em>
+						</p>
+						<p>
+							<p><%= foundcampground["description"] %></p>
+							<% if(currentUser&&foundcampground.author.id.equals(currentUser._id)) { %>
+								<a class="btn btn-success" href="/campgrounds/<%= foundcampground["_id"] %>/edit">Edit</a>
+								<form action="/campgrounds/<%= foundcampground["_id"] %>?_method=DELETE" method="post" class="d-inline">
+									<button class="btn btn-danger">
+										Delete
+									</button>
+								</form>
+							<% } %>
+						<p>
+					</p>
+				</div>
+			</div>
+		    <div class="well">
+				<div class="text-right">
+					<a class="btn btn-success" href="/campgrounds/<%= foundcampground['_id'] %>/comments/new">Add New Comment</a>
+				</div>
+				<hr>
+				<% foundcampground["comments"].forEach(function(comment){ %>
+					<div class="row">
+						<div class="col-md-12">
+							<p>
+								<strong><%= comment.author.username %></strong>
+								<span class="float-right">10 Days ago</span>
+							</p>
+							<p>
+								<%= comment["title"] %>
+							</p>
+							<% if(currentUser&&comment.author.id.equals(currentUser['_id'])){ %>
+								<div>
+									<a href="
+									/campgrounds/<%= foundcampground["_id"] %>/comments/<%= comment['_id']%>/edit" 
+									class="btn btn-warning btn-sm py-0">Edit</a>
+									<form action="
+									  /campgrounds/<%= foundcampground['_id'] %>/comments/<%= comment['_id']%>?_method=DELETE"
+									  method="post" class="d-inline" >
+										<button class="btn btn-danger btn-sm py-0 ">Delete</button>
+									</form>
+								</div>
+							<% } %>
+						</div>
+					</div>
+				<% }) %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

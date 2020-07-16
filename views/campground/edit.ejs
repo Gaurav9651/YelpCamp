@@ -1,0 +1,26 @@
+<%- include("../partials/header") %>
+
+<h1 class="display-5 text-center mt-4">
+Edit campground
+</h1>
+<div class="container mt-3" style="width:30%; min-width:400px">
+	<form action="/campgrounds/<%= foundcampground['_id']%>?_method=PUT" method="post">
+		<div class="form-group">
+			<input type="text" class="form-control" name="campground[name]" value= "<%=foundcampground['name'] %>" >
+		</div>
+		<div class="form-group">
+			<input type="number" class="form-control" name="campground[price]" value= "<%=foundcampground['price'] %>" min="0" step="100">
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" name="campground[image]" value="<%=foundcampground['url']%>" >
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" name="campground[description]" value="<%=foundcampground['description'] %>">
+		</div>
+		<button class="btn btn-success" style="width:100%;" >
+			Submit
+		</button>
+	</form>
+</div>
+
+<%- include("../partials/footer.ejs") %>
