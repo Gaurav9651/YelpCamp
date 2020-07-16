@@ -15,7 +15,6 @@ var indexRoutes           = require("./routes/index");
 var methodOverride        = require("method-override");
 var flash                 = require("connect-flash");
 var app= express();
-// mongoose.connect("mongodb://localhost:27017/yelp_camp",{useNewUrlParser:true, useUnifiedTopology: true});
 mongoose.connect(process.env.DATABASEURL,{ useNewUrlParser: true, useUnifiedTopology: true});
 app.use(session({
   secret: 'rusty is the cutest dog in this world',
@@ -24,7 +23,7 @@ app.use(session({
 }))
 
 // seedDB();
-
+mongoose.set('useFindAndModify', false);
 app.set("view engine","ejs");
 app.use(flash());
 passport.use(new LocalStrategy(User.authenticate()));

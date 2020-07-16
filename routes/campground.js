@@ -76,7 +76,7 @@ router.get("/campgrounds/:id/edit",middleware.isCampgroundAuthorised,function(re
 })
 
 router.put("/campgrounds/:id",middleware.isCampgroundAuthorised,function(req,res){
-	Campground.findByIdAndUpdate(req.params.id,req.body.campground,function(err,updatedCampground)
+	Campground.findOneAndUpdate({_id:req.params.id},req.body.campground,function(err,updatedCampground)
 	{
 		if(err)
 			{
@@ -91,7 +91,7 @@ router.put("/campgrounds/:id",middleware.isCampgroundAuthorised,function(req,res
 })
 
 router.delete("/campgrounds/:id",middleware.isCampgroundAuthorised,function(req,res){
-   Campground.findByIdAndRemove(req.params.id,function(err)
+   Campground.findOneAndRemove({_id:req.params.id},function(err)
 	{
 	   if(err)
 		   {
