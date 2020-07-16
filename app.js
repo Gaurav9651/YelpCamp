@@ -49,7 +49,4 @@ app.use(indexRoutes);
 
 
 
-app.listen(3000,function()
-{
- console.log("Starting Yelp Camp Server");	
-})
+app.listen(process.env.PORT||3000,process.env.IP)	;
