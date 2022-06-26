@@ -4,20 +4,20 @@ var Campground = require("../models/campground");
 var Comment    = require("../models/comment");
 var middleware  = require("../middleware");
 
-router.get("/campgrounds/:id/comments/new",middleware.isloggedin,function(req,res)
-{
-    Campground.findById(req.params.id,function(err,campground){
-		if(err)
-			{
-				req.flash("error","Cannot Find such comment");
-				res.redirect("/campgrounds");
-			}
-		else
-			{
-                res.render("comment/new",{campground:campground});
-			}
-	})
-})
+// router.get("/campgrounds/:id/comments/new",middleware.isloggedin,function(req,res)
+// {
+//     Campground.findById(req.params.id,function(err,campground){
+// 		if(err)
+// 			{
+// 				req.flash("error","Cannot Find such comment");
+// 				res.redirect("/campgrounds");
+// 			}
+// 		else
+// 			{
+//                 res.render("comment/new",{campground:campground});
+// 			}
+// 	})
+// })
 
 router.post("/campgrounds/:id/comments",middleware.isloggedin,function(req,res){
 	Campground.findById(req.params.id,function(err,campground){

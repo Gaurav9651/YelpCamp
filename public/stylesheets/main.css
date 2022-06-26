@@ -1,3 +1,15 @@
+.inputcomment input
+{
+	width: 100%;
+    border: 0;
+    border-bottom: 1px solid pink;
+    background-color: rgba(130,33,255,0.0);
+    outline: none;
+}
+.inputcomment
+{
+	width:100%;
+}
 .image-container
 {
 	width:100%;
@@ -16,7 +28,7 @@
 	border:1px solid rgba(0,0,0,0.12) ;
 	border-radius:4px;
 	padding:1rem;
-	background-color:rgba(130,33,255,0.067);
+	background-color:rgba(130,33,255,0.054);
 }
 #show
 {
